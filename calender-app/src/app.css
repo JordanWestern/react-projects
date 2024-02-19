@@ -1,0 +1,30 @@
+.calendar {
+  text-align: center;
+}
+
+.calendar-content {
+  background-color: #282c34;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.calender-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.calender-container-inner {
+  width: 700px;
+}
+
+.calendar-grid-item {
+  background: #fff;
+  line-height: 34px;
+  padding: 0;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+}
