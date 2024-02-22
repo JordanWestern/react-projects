@@ -1,42 +1,33 @@
 interface Props {
-  selectedMonth: number;
+  title: string;
+  selected: number;
+  min: number;
+  max: number;
   onSelectedChanged: (val: number) => void;
 }
 
 export default function MonthSlider({
-  selectedMonth,
+  title,
+  selected,
+  min,
+  max,
   onSelectedChanged,
 }: Props) {
   return (
     <>
-      <label htmlFor="months" className="form-label">
-        {Month[selectedMonth]}
+      <label htmlFor="slider" className="form-label">
+        {title}
       </label>
       <input
         type="range"
-        className="form-range slider"
-        id="months"
-        min="0"
-        max="11"
+        className="form-range"
+        id="slider"
+        min={min}
+        max={max}
         step="1"
-        defaultValue={selectedMonth}
+        defaultValue={selected}
         onChange={(e) => onSelectedChanged(e.currentTarget.valueAsNumber)}
       ></input>
     </>
   );
-}
-
-enum Month {
-  January,
-  February,
-  March,
-  April,
-  May,
-  June,
-  July,
-  August,
-  September,
-  October,
-  November,
-  December,
 }
