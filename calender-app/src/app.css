@@ -11,12 +11,13 @@
   color: white;
 }
 
-.calender-container {
+.calender-grid {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.calender-container-inner {
+
+.calender-grid-inner {
   width: 700px;
 }
 
@@ -27,4 +28,8 @@
   text-align: center;
   width: 100px;
   height: 100px;
+}
+
+.container.slider {
+  width: 30%;
 }

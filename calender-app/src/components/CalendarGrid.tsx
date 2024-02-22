@@ -1,31 +1,30 @@
 import CalendarGridItem from "./CalendarGridItem";
-
-function ChunkArray(array: any[], chunkSize: number): any[][] {
-  const chunkedArray: any[][] = [];
-
-  while (array.length > 0) {
-    chunkedArray.push(array.splice(0, chunkSize));
-  }
-
-  return chunkedArray;
-}
+import MonthSlider from "./MonthSlider";
+import { useState } from "react";
 
 export default function CalendarGrid() {
   let date = new Date();
 
-  let daysInMonth =
-    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() - 1;
+  const [currentMonth, setMonth] = useState(date.getMonth());
+
+  let daysInMonth = new Date(date.getFullYear(), currentMonth + 1, 0).getDate();
 
   let daysArray = Array.from(new Array(daysInMonth), (x, i) => i + 1);
 
   return (
     <>
-      <div className="calender-container flex-container">
-        <div className="calender-container-inner">
+      <div className="calender-grid flex-container">
+        <div className="calender-grid-inner">
           {daysArray.map((day) => (
             <CalendarGridItem day={day} />
           ))}
         </div>
+      </div>
+      <div className="container slider">
+        <MonthSlider
+          selectedMonth={currentMonth}
+          onSelectedChanged={setMonth}
+        />
       </div>
     </>
   );
