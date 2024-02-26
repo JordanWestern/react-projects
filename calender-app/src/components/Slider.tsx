@@ -6,7 +6,7 @@ interface Props {
   onSelectedChanged: (val: number) => void;
 }
 
-export default function MonthSlider({
+export default function Slider({
   title,
   selected,
   min,

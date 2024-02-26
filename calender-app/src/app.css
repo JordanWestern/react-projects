@@ -4,33 +4,33 @@
 
 .calendar-content {
   background-color: #282c34;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   color: white;
 }
 
 .calender-grid {
-  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.calender-grid-inner {
-  width: 700px;
-}
-
 .calendar-grid-item {
-  background: #fff;
-  line-height: 34px;
-  padding: 0;
+  background: #393f4b;
+  padding: 20px;
   text-align: center;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 }
 
 .container.slider {
   width: 30%;
   padding: 10px;
+}
+
+.circle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

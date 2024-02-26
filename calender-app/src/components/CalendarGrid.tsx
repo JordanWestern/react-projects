@@ -1,5 +1,5 @@
 import CalendarGridItem from "./CalendarGridItem";
-import MonthSlider from "./MonthSlider";
+import Slider from "./Slider";
 import { useState } from "react";
 
 export default function CalendarGrid() {
@@ -17,15 +17,8 @@ export default function CalendarGrid() {
       <h6 className="display-6">
         {Month[currentMonth]} {currentYear}
       </h6>
-      <div className="calender-grid flex-container">
-        <div className="calender-grid-inner">
-          {daysArray.map((day) => (
-            <CalendarGridItem day={day} />
-          ))}
-        </div>
-      </div>
       <div className="container slider">
-        <MonthSlider
+        <Slider
           title="Month"
           selected={currentMonth}
           min={0}
@@ -34,13 +27,18 @@ export default function CalendarGrid() {
         />
       </div>
       <div className="container slider">
-        <MonthSlider
+        <Slider
           title="Year"
           selected={currentYear}
           min={date.getFullYear()}
           max={date.getFullYear() + 5}
           onSelectedChanged={setYear}
         />
+      </div>
+      <div className="calender-grid flex-container">
+        {daysArray.map((day) => (
+          <CalendarGridItem day={day} />
+        ))}
       </div>
     </>
   );
