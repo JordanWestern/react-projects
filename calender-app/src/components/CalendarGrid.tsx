@@ -2,6 +2,21 @@ import CalendarGridItem from "./CalendarGridItem";
 import Slider from "./Slider";
 import { useState } from "react";
 
+enum Month {
+  January,
+  February,
+  March,
+  April,
+  May,
+  June,
+  July,
+  August,
+  September,
+  October,
+  November,
+  December,
+}
+
 export default function CalendarGrid() {
   let date = new Date();
 
@@ -42,19 +57,4 @@ export default function CalendarGrid() {
       </div>
     </>
   );
-}
-
-enum Month {
-  January,
-  February,
-  March,
-  April,
-  May,
-  June,
-  July,
-  August,
-  September,
-  October,
-  November,
-  December,
 }
