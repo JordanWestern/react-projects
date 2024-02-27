@@ -52,7 +52,7 @@ export default function CalendarGrid() {
       </div>
       <div className="calender-grid flex-container">
         {daysArray.map((day) => (
-          <CalendarGridItem day={day} />
+          <CalendarGridItem date={new Date(currentYear, currentMonth, day)} />
         ))}
       </div>
     </>
