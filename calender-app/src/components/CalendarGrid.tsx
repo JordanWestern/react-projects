@@ -17,22 +17,25 @@ enum Month {
   December,
 }
 
+function GetDaysInMonth(year: number, month: number) {
+  let daysInMonth = new Date(year, month + 1, 0).getDate();
+  return Array.from(new Array(daysInMonth), (x, i) => i + 1);
+}
+
 export default function CalendarGrid() {
-  let date = new Date();
+  let currentDate = new Date();
 
-  const [currentMonth, setMonth] = useState(date.getMonth());
-  const [currentYear, setYear] = useState(date.getFullYear());
+  const [currentMonth, setMonth] = useState(currentDate.getMonth());
+  const [currentYear, setYear] = useState(currentDate.getFullYear());
 
-  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-  let daysArray = Array.from(new Array(daysInMonth), (x, i) => i + 1);
+  let daysArray = GetDaysInMonth(currentYear, currentMonth);
 
   return (
     <>
       <h6 className="display-6">
         {Month[currentMonth]} {currentYear}
       </h6>
-      <div className="container slider">
+      <div className="container slider-container">
         <Slider
           title="Month"
           selected={currentMonth}
@@ -40,13 +43,11 @@ export default function CalendarGrid() {
           max={11}
           onSelectedChanged={setMonth}
         />
-      </div>
-      <div className="container slider">
         <Slider
           title="Year"
           selected={currentYear}
-          min={date.getFullYear()}
-          max={date.getFullYear() + 5}
+          min={currentDate.getFullYear()}
+          max={currentDate.getFullYear() + 5}
           onSelectedChanged={setYear}
         />
       </div>

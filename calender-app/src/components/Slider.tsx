@@ -20,7 +20,7 @@ export default function Slider({
       </label>
       <input
         type="range"
-        className="sexy-slider form-range"
+        className="form-range"
         id="slider"
         min={min}
         max={max}

@@ -21,6 +21,6 @@
   height: 150px;
 }
 
-.container.slider {
-  width: 30%;
+.slider-container {
+  margin: 50px 0;
 }
