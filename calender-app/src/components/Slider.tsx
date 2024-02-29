@@ -27,6 +27,8 @@ export default function Slider({
         step="1"
         defaultValue={selected}
         onChange={(e) => onSelectedChanged(e.currentTarget.valueAsNumber)}
+        data-theme="dark"
+        data-bs-theme="dark"
       ></input>
     </>
   );

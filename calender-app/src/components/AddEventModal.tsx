@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 type Props = {
   isOpen: boolean;
@@ -19,34 +19,39 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
   return (
     <Modal
       show={isOpen}
-      onHide={OnClose}
+      onHide={Close}
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      data-theme="dark"
+      data-bs-theme="dark"
+      className="modal"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Add Event</Modal.Title>
+        <Modal.Title>Event</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <input
-          type="text"
-          value={eventName}
-          onChange={(e) => setEventName(e.target.value)}
-          placeholder="Event Name"
-        />
+        <Form>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="name"
+              onChange={(e) => setEventName(e.target.value)}
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows={3} />
+          </Form.Group>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={Close}>
           Close
         </Button>
-        <Button
-          variant="primary"
-          onClick={() => {
-            OnAddEvent(eventName);
-            setEventName("");
-            Close();
-          }}
-        >
-          Add Event
+        <Button variant="primary" onClick={() => OnAddEvent(eventName)}>
+          Save
         </Button>
       </Modal.Footer>
     </Modal>

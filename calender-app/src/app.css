@@ -4,7 +4,7 @@
 
 .calendar-content {
   background-color: #282c34;
-  color: #ffffff;
+  color: white;
 }
 
 .calender-grid {
@@ -14,13 +14,53 @@
 }
 
 .calendar-grid-item {
-  background: #393f4b;
+  background: #343a40;
   padding: 20px;
   text-align: center;
   width: 200px;
   height: 150px;
 }
 
+.badge-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
 .slider-container {
   margin: 50px 0;
+}
+
+.modal {
+  color: white;
+}
+
+.custom-scrollbar {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #393f4b;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #0075fc;
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #005eca;
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  display: none;
 }

@@ -18,22 +18,29 @@ export default function CalendarGridItem({
 }: Props) {
   return (
     <Card bg="dark" text="light">
-      <Card.Header>
-        {date.toLocaleString("en-UK", { weekday: "long" })} {format(date, "d")}
-      </Card.Header>
-      <Card.Body className="calendar-grid-item card-body">
+      <Card.Header className="d-flex">
         <Button
-          className="d-flex"
+          className="d-flex align-items-center justify-content-center"
+          style={{
+            marginRight: "10px",
+            height: "20px",
+            width: "20px",
+          }}
           variant="primary"
           onClick={() => OnAddEvent(date)}
         >
           <FontAwesomeIcon icon={faPlus} size="xs" />
         </Button>
-        {calendarEvents.map((event, index) => (
-          <span key={index} className="badge badge-pill bg-success">
-            {event.name} {event.date.toDateString()}
-          </span>
-        ))}
+        {date.toLocaleString("en-UK", { weekday: "long" })} {format(date, "d")}
+      </Card.Header>
+      <Card.Body className="calendar-grid-item card-body custom-scrollbar">
+        <div className="d-flex flex-wrap flex-column pt-2">
+          {calendarEvents.map((event, index) => (
+            <span key={index} className="badge badge-pill bg-primary mr-1 mb-1">
+              <span className="badge-text">{event.name}</span>
+            </span>
+          ))}
+        </div>
       </Card.Body>
     </Card>
   );
