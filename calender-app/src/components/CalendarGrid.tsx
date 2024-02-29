@@ -1,8 +1,7 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import AddEventModal from "./AddEventModal";
 import CalendarGridItem from "./CalendarGridItem";
 import Slider from "./Slider";
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
 
 enum Month {
   January,
@@ -24,22 +23,15 @@ export type CalendarEvent = {
   date: Date;
 };
 
-function GetDaysInMonth(year: number, month: number) {
-  let daysInMonth = new Date(year, month + 1, 0).getDate();
-  return Array.from(new Array(daysInMonth), (x, i) => i + 1);
-}
-
 export default function CalendarGrid() {
-  let currentDate = new Date();
-
-  const [currentMonth, setMonth] = useState(currentDate.getMonth());
-  const [currentYear, setYear] = useState(currentDate.getFullYear());
+  const currentDate = new Date();
+  const [selectedDate, setSelectedDate] = useState<Date>(currentDate);
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const eventDate = useRef<Date>(new Date());
+  const eventDate = useRef<Date>(currentDate);
 
   function OnAddEvent(name: string, date: Date) {
-    const newEvent: CalendarEvent = { name: name, date: date };
+    const newEvent: CalendarEvent = { name, date };
     setCalendarEvents([...calendarEvents, newEvent]);
     setIsModalOpen(false);
   }
@@ -50,36 +42,49 @@ export default function CalendarGrid() {
     );
   }
 
-  let daysArray = GetDaysInMonth(currentYear, currentMonth);
-
   return (
     <>
       <h6 className="display-6">
-        {Month[currentMonth]} {currentYear}
+        {Month[selectedDate.getMonth()]} {selectedDate.getFullYear()}
       </h6>
       <div className="container slider-container">
         <Slider
           title="Month"
-          selected={currentMonth}
+          selected={selectedDate.getMonth()}
           min={0}
           max={11}
-          onSelectedChanged={setMonth}
+          onSelectedChanged={(month) =>
+            setSelectedDate(new Date(selectedDate.getFullYear(), month))
+          }
         />
         <Slider
           title="Year"
-          selected={currentYear}
+          selected={selectedDate.getFullYear()}
           min={currentDate.getFullYear()}
           max={currentDate.getFullYear() + 5}
-          onSelectedChanged={setYear}
+          onSelectedChanged={(year) =>
+            setSelectedDate(new Date(year, selectedDate.getMonth()))
+          }
         />
       </div>
       <div className="calender-grid flex-container">
-        {daysArray.map((day) => (
+        {Array.from(
+          {
+            length: new Date(
+              selectedDate.getFullYear(),
+              selectedDate.getMonth() + 1,
+              0
+            ).getDate(),
+          },
+          (_, i) => i + 1
+        ).map((day) => (
           <CalendarGridItem
-            key={crypto.randomUUID()}
-            date={new Date(currentYear, currentMonth, day)}
+            key={day}
+            date={
+              new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day)
+            }
             calendarEvents={GetEventsForDate(
-              new Date(currentYear, currentMonth, day)
+              new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day)
             )}
             OnAddEvent={(date) => {
               eventDate.current = date;

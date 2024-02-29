@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { CalendarEvent } from "./CalendarGrid";
 import { Button } from "react-bootstrap";
 
 type Props = {
@@ -11,6 +10,11 @@ type Props = {
 
 export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
   const [eventName, setEventName] = useState("");
+
+  function Close() {
+    setEventName("");
+    OnClose();
+  }
 
   return (
     <Modal
@@ -31,10 +35,17 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={OnClose}>
+        <Button variant="secondary" onClick={Close}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => OnAddEvent(eventName)}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            OnAddEvent(eventName);
+            setEventName("");
+            Close();
+          }}
+        >
           Add Event
         </Button>
       </Modal.Footer>

@@ -6,7 +6,6 @@ import { format } from "date-fns";
 import { CalendarEvent } from "./CalendarGrid";
 
 type Props = {
-  key: string;
   date: Date;
   calendarEvents: CalendarEvent[];
   OnAddEvent: (date: Date) => void;
@@ -30,11 +29,8 @@ export default function CalendarGridItem({
         >
           <FontAwesomeIcon icon={faPlus} size="xs" />
         </Button>
-        {calendarEvents.map((event) => (
-          <span
-            key={crypto.randomUUID()}
-            className="badge badge-pill bg-success"
-          >
+        {calendarEvents.map((event, index) => (
+          <span key={index} className="badge badge-pill bg-success">
             {event.name} {event.date.toDateString()}
           </span>
         ))}
