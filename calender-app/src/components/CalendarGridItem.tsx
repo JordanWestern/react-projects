@@ -17,7 +17,15 @@ export default function CalendarGridItem({
   OnAddEvent,
 }: Props) {
   return (
-    <Card bg="dark" text="light">
+    <Card
+      bg="dark"
+      text="light"
+      style={{
+        border: "0px",
+        margin: "2px",
+        borderRadius: "10px",
+      }}
+    >
       <Card.Header className="d-flex">
         <Button
           className="d-flex align-items-center justify-content-center"
