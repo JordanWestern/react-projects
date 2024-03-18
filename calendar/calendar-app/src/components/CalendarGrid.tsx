@@ -1,7 +1,8 @@
 import AddEventModal from "./AddEventModal";
 import CalendarGridItem from "./CalendarGridItem";
 import Slider from "./Slider";
-import { useState, useRef } from "react";
+import axios from "axios";
+import { useState, useRef, useEffect } from "react";
 
 enum Month {
   January,
@@ -19,8 +20,16 @@ enum Month {
 }
 
 export type CalendarEvent = {
+  id: string;
   name: string;
-  date: Date;
+  eventDate: Date;
+};
+
+const formatDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 export default function CalendarGrid() {
@@ -30,15 +39,44 @@ export default function CalendarGrid() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const eventDate = useRef<Date>(currentDate);
 
+  useEffect(() => {
+    fetchEvents(selectedDate);
+  }, [selectedDate]);
+
+  const fetchEvents = async (date: Date) => {
+    try {
+      const formattedDate = formatDate(date);
+      const response = await axios.post<CalendarEvent[]>(
+        "https://localhost:7101/api/events",
+        formattedDate,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Convert eventDate strings to Date objects
+      const eventsWithDates: CalendarEvent[] = response.data.map((event) => ({
+        ...event,
+        eventDate: new Date(event.eventDate),
+      }));
+
+      setCalendarEvents(eventsWithDates);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+
   function OnAddEvent(name: string, date: Date) {
-    const newEvent: CalendarEvent = { name, date };
+    const newEvent: CalendarEvent = { id: "new id", name, eventDate: date };
     setCalendarEvents([...calendarEvents, newEvent]);
     setIsModalOpen(false);
   }
 
   function GetEventsForDate(date: Date) {
     return calendarEvents.filter(
-      (event) => event.date.toDateString() === date.toDateString()
+      (event) => event.eventDate.toDateString() === date.toDateString()
     );
   }
 

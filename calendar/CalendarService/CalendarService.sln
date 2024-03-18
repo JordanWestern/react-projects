@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar.Api", "Calendar.Api\Calendar.Api.csproj", "{AD39A91A-296E-405E-B1EE-2638BFE9F797}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calandar.Contracts", "Calandar.Contracts\Calandar.Contracts.csproj", "{BE24023C-C48A-4E35-9859-866D928281A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD39A91A-296E-405E-B1EE-2638BFE9F797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD39A91A-296E-405E-B1EE-2638BFE9F797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD39A91A-296E-405E-B1EE-2638BFE9F797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD39A91A-296E-405E-B1EE-2638BFE9F797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE24023C-C48A-4E35-9859-866D928281A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE24023C-C48A-4E35-9859-866D928281A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE24023C-C48A-4E35-9859-866D928281A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE24023C-C48A-4E35-9859-866D928281A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F9A21DE-3235-4BF8-BEE5-3200DD804E30}
+	EndGlobalSection
+EndGlobal
