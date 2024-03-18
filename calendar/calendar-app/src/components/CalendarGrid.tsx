@@ -56,13 +56,13 @@ export default function CalendarGrid() {
         }
       );
 
-      // Convert eventDate strings to Date objects
-      const eventsWithDates: CalendarEvent[] = response.data.map((event) => ({
+      // TODO: not sure why this extra mapping is required? (workaround)
+      const events: CalendarEvent[] = response.data.map((event) => ({
         ...event,
         eventDate: new Date(event.eventDate),
       }));
 
-      setCalendarEvents(eventsWithDates);
+      setCalendarEvents(events);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
