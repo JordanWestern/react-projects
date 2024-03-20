@@ -1,3 +1,7 @@
+using Calendar.Application.Services;
+using Calendar.Domain.Repositories;
+using Calendar.Infrastucture;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +22,9 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
+
+builder.Services.AddScoped<ICalendarEventService, CalendarEventService>();
+builder.Services.AddSingleton<ICalendarEventsRepository, InMemoryRepository>();
 
 var app = builder.Build();
 

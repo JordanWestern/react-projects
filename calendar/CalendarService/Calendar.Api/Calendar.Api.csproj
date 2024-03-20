@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calandar.Contracts\Calandar.Contracts.csproj" />
+    <ProjectReference Include="..\Calendar.Application\Calendar.Application.csproj" />
+    <ProjectReference Include="..\Calendar.Infrastucture\Calendar.Infrastucture.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Calandar.Contracts;
+﻿using Calendar.Application.Contracts;
+using Calendar.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Calendar.Api.Controllers;
@@ -7,17 +8,16 @@ namespace Calendar.Api.Controllers;
 [Route("api/[controller]")]
 public class EventsController : ControllerBase
 {
-    [HttpPost]
-    public ActionResult<IEnumerable<CalendarEvent>> GetEventsForDate([FromBody] DateOnly date) => Ok(DummyEvents(date));
+    private readonly ICalendarEventService _calendarEventService;
 
-    private static IEnumerable<CalendarEvent> DummyEvents(DateOnly date)
+    public EventsController(ICalendarEventService calendarEventService)
     {
-        for (var i = 0; i < 10; i++)
-        {
-            yield return new CalendarEvent(
-                Guid.NewGuid().ToString(),
-                $"Event {i}",
-                date.AddDays(i));
-        }
+        _calendarEventService = calendarEventService;
     }
+
+    [HttpGet]
+    public IActionResult List([FromQuery] DateOnly date) => Ok(_calendarEventService.GetCalendarEvents(date));
+
+    [HttpPost]
+    public IActionResult Create([FromBody] CreateCalendarEventRequest createCalendarEventRequest) => Created(string.Empty, _calendarEventService.CreateCalendarEvent(createCalendarEventRequest));
 }

@@ -46,14 +46,8 @@ export default function CalendarGrid() {
   const fetchEvents = async (date: Date) => {
     try {
       const formattedDate = formatDate(date);
-      const response = await axios.post<CalendarEvent[]>(
-        "https://localhost:7101/api/events",
-        formattedDate,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await axios.get<CalendarEvent[]>(
+        `https://localhost:7101/api/events?date=${formattedDate}`
       );
 
       // TODO: not sure why this extra mapping is required? (workaround)
@@ -69,9 +63,29 @@ export default function CalendarGrid() {
   };
 
   function OnAddEvent(name: string, date: Date) {
-    const newEvent: CalendarEvent = { id: "new id", name, eventDate: date };
-    setCalendarEvents([...calendarEvents, newEvent]);
-    setIsModalOpen(false);
+    const formattedDate = formatDate(date);
+
+    axios
+      .post("https://localhost:7101/api/events", {
+        name: name,
+        eventDate: formattedDate,
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          const newEvent: CalendarEvent = {
+            id: response.data.id,
+            name: name,
+            eventDate: date,
+          };
+          setCalendarEvents([...calendarEvents, newEvent]);
+          setIsModalOpen(false);
+        } else {
+          console.error("Failed to add event:", response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding event:", error);
+      });
   }
 
   function GetEventsForDate(date: Date) {
