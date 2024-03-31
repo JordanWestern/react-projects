@@ -39,6 +39,7 @@ export default function CalendarGrid() {
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const eventDate = useRef<Date>(currentDate);
+  const selectedEvent = useRef<CalendarEvent | null>(null);
 
   useEffect(() => {
     fetchEvents(selectedDate);
@@ -145,12 +146,21 @@ export default function CalendarGrid() {
               eventDate.current = date;
               setIsModalOpen(true);
             }}
+            OnClickEvent={(event) => {
+              eventDate.current = event.eventDate;
+              selectedEvent.current = event;
+              setIsModalOpen(true);
+            }}
           />
         ))}
       </div>
       <AddEventModal
         isOpen={isModalOpen}
-        OnClose={() => setIsModalOpen(false)}
+        event={selectedEvent?.current || undefined}
+        OnClose={() => {
+          selectedEvent.current = null;
+          setIsModalOpen(false);
+        }}
         OnAddEvent={(name, description) =>
           OnAddEvent(name, description, eventDate.current)
         }

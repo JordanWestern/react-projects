@@ -12,7 +12,4 @@ public class InMemoryRepository : ICalendarEventsRepository
         _entities.Where(calendarEvent => calendarEvent.Date.MatchesMonthAndYear(eventDate));
 
     public void CreateCalendarEvent(CalendarEvent calendarEvent) => _entities.Add(calendarEvent);
-
-    public CalendarEvent? GetCalendarEvent(string id) =>
-        _entities.SingleOrDefault(calendarEvent => calendarEvent.Id == id);
 }

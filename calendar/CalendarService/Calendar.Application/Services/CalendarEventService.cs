@@ -24,10 +24,4 @@ public class CalendarEventService : ICalendarEventService
         _calendarEventsRepository.CreateCalendarEvent(entity);
         return new CalendarEvent(entity.Id, entity.Name, entity.Description, entity.Date);
     }
-
-    public CalendarEvent GetCalendarEvent(string id)
-    {
-        var calendarEvent = _calendarEventsRepository.GetCalendarEvent(id);
-        return calendarEvent == null ? new NullCalendarEvent() : new CalendarEvent(calendarEvent.Id, calendarEvent.Name, calendarEvent.Description, calendarEvent.Date);
-    }
 }

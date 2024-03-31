@@ -9,12 +9,14 @@ type Props = {
   date: Date;
   calendarEvents: CalendarEvent[];
   OnAddEvent: (date: Date) => void;
+  OnClickEvent: (event: CalendarEvent) => void;
 };
 
 export default function CalendarGridItem({
   date,
   calendarEvents,
   OnAddEvent,
+  OnClickEvent,
 }: Props) {
   return (
     <Card
@@ -47,6 +49,7 @@ export default function CalendarGridItem({
             <span
               key={event.id}
               className="badge badge-pill bg-primary mr-1 mb-1"
+              onClick={() => OnClickEvent(event)}
             >
               <span className="badge-text">{event.name}</span>
             </span>
