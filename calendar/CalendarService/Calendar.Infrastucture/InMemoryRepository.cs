@@ -8,8 +8,8 @@ public class InMemoryRepository : ICalendarEventsRepository
 {
     private readonly IList<CalendarEvent> _entities = new List<CalendarEvent>();
 
-    public IEnumerable<CalendarEvent> GetCalendarEvents(DateOnly eventDate) =>
-        _entities.Where(calendarEvent => calendarEvent.Date.MatchesMonthAndYear(eventDate));
+    public IEnumerable<CalendarEvent> GetCalendarEvents(int year, int month) =>
+        _entities.Where(calendarEvent => calendarEvent.Date.MatchesMonthAndYear(year, month));
 
     public void CreateCalendarEvent(CalendarEvent calendarEvent) => _entities.Add(calendarEvent);
 }

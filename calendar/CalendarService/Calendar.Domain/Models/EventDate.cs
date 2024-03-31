@@ -19,7 +19,7 @@ public class EventDate
         return new EventDate(eventDate);
     }
 
-    public bool MatchesMonthAndYear(DateOnly date) => Value.Month == date.Month && Value.Year == date.Year;
+    public bool MatchesMonthAndYear(int year, int month) => Value.Month == month && Value.Year ==  year;
 
 
     public static implicit operator DateOnly(EventDate eventDate) => eventDate.Value;

@@ -12,9 +12,9 @@ public class CalendarEventService : ICalendarEventService
         _calendarEventsRepository = calendarEventsRepository;
     }
 
-    public IEnumerable<CalendarEvent> GetCalendarEvents(DateOnly date)
+    public IEnumerable<CalendarEvent> GetCalendarEvents(int year, int month)
     {
-        var entities = _calendarEventsRepository.GetCalendarEvents(date);
+        var entities = _calendarEventsRepository.GetCalendarEvents(year, month);
         return entities.Select(entity => new CalendarEvent(entity.Id, entity.Name, entity.Description, entity.Date));
     }
 

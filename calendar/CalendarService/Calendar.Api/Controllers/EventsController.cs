@@ -16,7 +16,7 @@ public class EventsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult List([FromQuery] DateOnly date) => Ok(_calendarEventService.GetCalendarEvents(date));
+    public IActionResult List([FromQuery] int year, int month) => Ok(_calendarEventService.GetCalendarEvents(year, month));
 
     [HttpPost]
     public IActionResult Create([FromBody] CreateCalendarEventRequest createCalendarEventRequest) => Created(string.Empty, _calendarEventService.CreateCalendarEvent(createCalendarEventRequest));

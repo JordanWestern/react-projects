@@ -47,9 +47,10 @@ export default function CalendarGrid() {
 
   const fetchEvents = async (date: Date) => {
     try {
-      const formattedDate = formatDate(date);
       const response = await axios.get<CalendarEvent[]>(
-        `https://localhost:7101/api/events?date=${formattedDate}`
+        `https://localhost:7101/api/events?year=${date.getFullYear()}&&month=${
+          date.getMonth() + 1
+        }`
       );
 
       // TODO: not sure why this extra mapping is required? (workaround)
