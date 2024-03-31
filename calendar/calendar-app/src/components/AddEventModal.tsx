@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, Form } from "react-bootstrap";
 
@@ -9,12 +9,10 @@ type Props = {
 };
 
 export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
-  const [eventName, setEventName] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
+  const eventName = useRef("");
+  const eventDescription = useRef("");
 
   function Close() {
-    setEventName("");
-    setEventDescription("");
     OnClose();
   }
 
@@ -38,7 +36,7 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
             <Form.Control
               type="text"
               placeholder="name"
-              onChange={(e) => setEventName(e.target.value)}
+              onChange={(e) => (eventName.current = e.target.value)}
               autoFocus
             />
           </Form.Group>
@@ -47,7 +45,7 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
             <Form.Control
               as="textarea"
               rows={3}
-              onChange={(e) => setEventDescription(e.target.value)}
+              onChange={(e) => (eventDescription.current = e.target.value)}
             />
           </Form.Group>
         </Form>
@@ -58,7 +56,9 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
         </Button>
         <Button
           variant="primary"
-          onClick={() => OnAddEvent(eventName, eventDescription)}
+          onClick={() =>
+            OnAddEvent(eventName.current, eventDescription.current)
+          }
         >
           Save
         </Button>
