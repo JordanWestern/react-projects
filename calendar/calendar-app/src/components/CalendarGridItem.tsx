@@ -48,7 +48,7 @@ export default function CalendarGridItem({
           {calendarEvents.map((event) => (
             <span
               key={event.id}
-              className="badge badge-pill bg-primary mr-1 mb-1"
+              className="badge badge-pill bg-primary mr-1 mb-1 hover-effect"
               onClick={() => OnClickEvent(event)}
             >
               <span className="badge-text">{event.name}</span>

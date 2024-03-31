@@ -64,3 +64,8 @@
 .custom-scrollbar::-webkit-scrollbar-corner {
   display: none;
 }
+
+.hover-effect:hover {
+  background-color: #005eca !important;
+  cursor: pointer;
+}
