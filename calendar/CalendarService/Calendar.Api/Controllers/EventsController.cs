@@ -18,6 +18,16 @@ public class EventsController : ControllerBase
     [HttpGet]
     public IActionResult List([FromQuery] DateOnly date) => Ok(_calendarEventService.GetCalendarEvents(date));
 
+    [HttpGet("{id}")]
+    public IActionResult Get([FromRoute] string id)
+    {
+        var calendarEvent = _calendarEventService.GetCalendarEvent(id);
+
+        return calendarEvent is NullCalendarEvent
+            ? NotFound()
+            : Ok(calendarEvent);
+    }
+
     [HttpPost]
     public IActionResult Create([FromBody] CreateCalendarEventRequest createCalendarEventRequest) => Created(string.Empty, _calendarEventService.CreateCalendarEvent(createCalendarEventRequest));
 }

@@ -22,6 +22,7 @@ enum Month {
 export type CalendarEvent = {
   id: string;
   name: string;
+  description: string;
   eventDate: Date;
 };
 
@@ -62,18 +63,20 @@ export default function CalendarGrid() {
     }
   };
 
-  function OnAddEvent(name: string, date: Date) {
+  function OnAddEvent(name: string, description: string, date: Date) {
     const formattedDate = formatDate(date);
 
     axios
       .post("https://localhost:7101/api/events", {
         name: name,
+        description: description,
         eventDate: formattedDate,
       })
       .then((response) => {
         if (response.status === 201) {
           const newEvent: CalendarEvent = {
             id: response.data.id,
+            description: description,
             name: name,
             eventDate: date,
           };
@@ -148,7 +151,9 @@ export default function CalendarGrid() {
       <AddEventModal
         isOpen={isModalOpen}
         OnClose={() => setIsModalOpen(false)}
-        OnAddEvent={(name) => OnAddEvent(name, eventDate.current)}
+        OnAddEvent={(name, description) =>
+          OnAddEvent(name, description, eventDate.current)
+        }
       />
     </>
   );

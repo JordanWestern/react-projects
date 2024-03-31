@@ -43,8 +43,11 @@ export default function CalendarGridItem({
       </Card.Header>
       <Card.Body className="calendar-grid-item card-body custom-scrollbar">
         <div className="d-flex flex-wrap flex-column pt-2">
-          {calendarEvents.map((event, index) => (
-            <span key={index} className="badge badge-pill bg-primary mr-1 mb-1">
+          {calendarEvents.map((event) => (
+            <span
+              key={event.id}
+              className="badge badge-pill bg-primary mr-1 mb-1"
+            >
               <span className="badge-text">{event.name}</span>
             </span>
           ))}

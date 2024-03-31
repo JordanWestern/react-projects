@@ -4,15 +4,17 @@ import { Button, Form } from "react-bootstrap";
 
 type Props = {
   isOpen: boolean;
-  OnAddEvent: (name: string) => void;
+  OnAddEvent: (name: string, description: string) => void;
   OnClose: () => void;
 };
 
 export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
   const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
 
   function Close() {
     setEventName("");
+    setEventDescription("");
     OnClose();
   }
 
@@ -42,7 +44,11 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
           </Form.Group>
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows={3} />
+            <Form.Control
+              as="textarea"
+              rows={3}
+              onChange={(e) => setEventDescription(e.target.value)}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -50,7 +56,10 @@ export default function AddEventModal({ isOpen, OnAddEvent, OnClose }: Props) {
         <Button variant="secondary" onClick={Close}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => OnAddEvent(eventName)}>
+        <Button
+          variant="primary"
+          onClick={() => OnAddEvent(eventName, eventDescription)}
+        >
           Save
         </Button>
       </Modal.Footer>

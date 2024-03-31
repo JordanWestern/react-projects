@@ -8,4 +8,6 @@ public interface ICalendarEventsRepository
 
 
     public void CreateCalendarEvent(CalendarEvent calendarEvent);
+
+    public CalendarEvent? GetCalendarEvent(string id);
 }
